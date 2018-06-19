@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itlaiba.shiro.ssm.mapper.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.itlaiba.shiro.ssm.pojo.TUser">
+    <id column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="roleid" jdbcType="INTEGER" property="roleid" />
+    <result column="rolename" property="rolename"/>
+    <result column="permsname" property="per"/>
+    
+  </resultMap>
+      
+  <select id="selectbyname" parameterType="String" resultMap="BaseResultMap">
+  	select * from t_user where username=#{username}
+  </select>
+  
+  <select id="selectbyrolename" parameterType="String" resultMap="BaseResultMap">
+  	select * from t_user u,t_role r where username=#{username} and r.roleid=u.roleid
+  </select> 
+  
+  <select id="selectbyper" parameterType="String" resultMap="BaseResultMap">
+  	select * from t_user u,t_role r,t_per p  where username=#{username} and r.roleid=u.roleid and p.roleid=r.roleid
+  </select>  
+  
+</mapper>
